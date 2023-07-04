@@ -7,11 +7,31 @@ class Student:
         self.courses_in_progress = []
         self.grades = {}
 
+    def rate_lecturer(self, lecturer, course, grade_l):
+        if isinstance(lecturer, Lecturer) and course in lecturer.courses_attached and course in self.finished_courses:
+            if course in lecturer.grades_l:
+                lecturer.grades_l[course] += [grade_l]
+            else:
+                lecturer.grades_l[course] = [grade_l]
+        else:
+            return 'Ошибка'
 
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
+        self.courses_attached = []
+
+
+class Lecturer(Mentor):
+    def __init__(self, name, surname):
+        super().__init__(name, surname)
+        self.courses_attached = []
+        self.grades_l = {}
+
+class Reviewer(Mentor):
+    def __init__(self, name, surname):
+        super().__init__(name, surname)
         self.courses_attached = []
 
     def rate_hw(self, student, course, grade):
@@ -23,28 +43,47 @@ class Mentor:
         else:
             return 'Ошибка'
 
-class Lecturer(Mentor):
-    def __init__(self, name, surname):
-        super().__init__(name, surname)
-        self.courses_attached = []
-
-class Reviewer(Mentor):
-    def __init__(self, name, surname):
-        super().__init__(name, surname)
-        self.courses_attached = []
 
 
 
+student_1 = Student('Bill', 'Tobin', 'male')
+student_1.courses_in_progress += ['Python']
+student_1.finished_courses += ['Designer']
+student_1.finished_courses += ['Tester']
 
-best_student = Student('Ruoy', 'Eman', 'your_gender')
-best_student.courses_in_progress += ['Python']
+student_2 = Student('Panther', 'Black', 'female')
+student_2.courses_in_progress += ['Python']
+student_2.finished_courses += ['Designer']
+student_2.finished_courses += ['Java']
 
-cool_mentor = Mentor('Some', 'Buddy')
-cool_mentor.courses_attached += ['Python']
+student_3 = Student('Tyler', 'Creator', 'male')
+student_3.courses_in_progress += ['Python']
+student_3.finished_courses += ['Tester']
+student_3.finished_courses += ['Java']
 
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
-cool_mentor.rate_hw(best_student, 'Python', 10)
+lecturer_1 = Lecturer('Tommy', 'Rock')
+lecturer_1.courses_attached += ['Python']
+lecturer_1.courses_attached += ['Java']
 
-print(best_student.grades)
-print(cool_mentor.courses_attached)
+lecturer_2 = Lecturer('Kim', 'Wong')
+lecturer_2.courses_attached += ['Python']
+lecturer_2.courses_attached += ['Designer']
+
+reviewer_1 = Reviewer('Steve', 'Rogers')
+reviewer_1.courses_attached += ['Python']
+reviewer_1.courses_attached += ['Tester']
+reviewer_1.courses_attached += ['Java']
+
+reviewer_2 = Reviewer('David', 'Smith')
+reviewer_2.courses_attached += ['Designer']
+
+reviewer_1.rate_hw(student_1, 'Python', 10)
+reviewer_1.rate_hw(student_2, 'Python', 9)
+reviewer_1.rate_hw(student_3, 'Python', 7)
+
+
+
+
+
+
+
