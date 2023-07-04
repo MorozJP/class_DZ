@@ -16,6 +16,10 @@ class Student:
         else:
             return 'Ошибка'
 
+    def __str__(self):
+        res = (f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за домашнее задание: {self.grades}\nКурсы в процессе изучения: {self.courses_in_progress}\nЗавершенные курсы: {self.finished_courses}')
+        return res
+
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -28,6 +32,10 @@ class Lecturer(Mentor):
         super().__init__(name, surname)
         self.courses_attached = []
         self.grades_l = {}
+
+    def __str__(self):
+        res = (f'Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {self.grades_l}')
+        return res
 
 class Reviewer(Mentor):
     def __init__(self, name, surname):
@@ -42,6 +50,10 @@ class Reviewer(Mentor):
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
+
+    def __str__(self):
+        res = (f'Имя: {self.name}\nФамилия: {self.surname}')
+        return res
 
 
 
@@ -80,6 +92,22 @@ reviewer_2.courses_attached += ['Designer']
 reviewer_1.rate_hw(student_1, 'Python', 10)
 reviewer_1.rate_hw(student_2, 'Python', 9)
 reviewer_1.rate_hw(student_3, 'Python', 7)
+
+
+print(student_1)
+print()
+print(student_2)
+print()
+print(student_3)
+print()
+print(lecturer_1)
+print()
+print(lecturer_2)
+print()
+print(reviewer_1)
+print()
+print(reviewer_2)
+
 
 
 
